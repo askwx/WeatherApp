@@ -17,25 +17,26 @@ function App() {
     couditionText:"",
     icon:""
   });
+
   const getWeather =(e) =>{
       e.preventDefault();
-      axios.get("http://api.weatherapi.com/v1/current.json?key=0c82c4c554114dce92f114137210705&q=London&aqi=no")
+      axios.get(`http://api.weatherapi.com/v1/current.json?key=0c82c4c554114dce92f114137210705&q=${city}&aqi=no`)
       .then(res =>{
         setResults({
           country:res.data.location.country,
           cityName:res.data.location.name,
-          temperature:res.data.current_temp_c,
-          couditionText:res.data.current.condition.text,
+          temperature:res.data.current.temp_c,
+          conditionText:res.data.current.condition.text,
           icon:res.data.current.condition.icon
         })
       })
   }
 
   return (
-    <div className="App">
+    <div className="test">
      <Title />
      <Form setCity = {setCity} getWeather = {getWeather} />
-     <Results result = {results} />
+     <Results results = {results} />
     </div>
   );
 }
